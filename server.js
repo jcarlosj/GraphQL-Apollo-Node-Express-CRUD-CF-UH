@@ -1,4 +1,5 @@
 const 
+    courses = require( './courses' ),
     /** Dependencies */
     { ApolloServer } = require( 'apollo-server' ),      
     { makeExecutableSchema } = require( 'graphql-tools' ),
@@ -16,7 +17,19 @@ const
     /** Crea Schema */
     mySchema = makeExecutableSchema({
         typeDefs: typeDefs,
-        resolvers: {}
+        resolvers: {
+            // parentObject (rootValue) Raiz de consultas de GraphQL
+            Query: {
+                getCourses( parentObject, { page, limit } ) {
+                    if( page !== undefined ) {
+                        console .log( 'pagina', page, 'muestra', limit );
+                        return courses .slice( ( page - 1 ) * limit, ( page ) * limit );
+                    }
+                    
+                    return courses;
+                }
+            }        
+        }
     }),
     /** Asocia Instancia de Apollo Server con el Schema */
     server = new ApolloServer({                         
