@@ -2,9 +2,10 @@
   "name": "graphql-apollo-server",
   "version": "1.0.0",
   "description": "API usando Node, GraphQL y Apollo Server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "keywords": [
     "node",
@@ -12,5 +13,13 @@
     "apollo"
   ],
   "author": "Juan Carlos Jimenez Gutierrez <jcjimenez29@misena.edu.co>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.12.0",
+    "graphql": "^15.0.0",
+    "graphql-tools": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
 }
