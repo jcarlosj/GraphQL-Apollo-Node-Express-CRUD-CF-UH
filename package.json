@@ -1,0 +1,16 @@
+{
+  "name": "graphql-apollo-server",
+  "version": "1.0.0",
+  "description": "API usando Node, GraphQL y Apollo Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "graphql",
+    "apollo"
+  ],
+  "author": "Juan Carlos Jimenez Gutierrez <jcjimenez29@misena.edu.co>",
+  "license": "ISC"
+}
