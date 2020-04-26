@@ -1,5 +1,5 @@
-const 
-    courses = require( './courses' ),
+let courses = require( './courses' );
+const
     /** Dependencies */
     { ApolloServer } = require( 'apollo-server' ),      
     { makeExecutableSchema } = require( 'graphql-tools' ),
@@ -9,6 +9,9 @@ const
             id: ID!
             title: String!
             views: Int
+        }
+        type Alert {
+            message: String
         }
         input CourseInput {
             title: String!
@@ -20,6 +23,7 @@ const
         type Mutation {
             addCourse( input: CourseInput ) : Course
             updateCourse( id: ID!, input: CourseInput ) : Course
+            deleteCourse( id: ID! ) : Alert
         }
     `,
     /** Crea Schema */
@@ -59,6 +63,11 @@ const
         
                     return newCourse;
                 },
+                deleteCourse( parentObject, { id }) {
+                    courses = courses .filter( course => id != course .id );
+        
+                    return { message: `El curso con id ${ id } fue eliminado` }
+                }
             }        
         }
     }),
