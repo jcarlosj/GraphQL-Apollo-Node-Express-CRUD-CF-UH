@@ -19,6 +19,7 @@ const
         }
         type Query {
             getCourses( page: Int, limit: Int = 1 ) : [ Course ]
+            getCourse( id: ID! ) : Course
         }
         type Mutation {
             addCourse( input: CourseInput ) : Course
@@ -39,7 +40,12 @@ const
                     }
                     
                     return courses;
-                }
+                },
+                getCourse( parentObject, { id }) {     // Destructuring
+                    console .log( 'Course ID', id );
+                    
+                    return courses .find( course => id == course .id );
+                },
             }, 
             Mutation: {
                 // parentObject valor resuelto por el resolver padre, equivalente al rootValue de GraphQL
