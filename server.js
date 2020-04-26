@@ -10,13 +10,20 @@ const
             title: String!
             views: Int
         }
+        input CourseInput {
+            title: String!
+            views: Int
+        }
         type Query {
             getCourses( page: Int, limit: Int = 1 ) : [ Course ]
+        }
+        type Mutation {
+            addCourse( input: CourseInput ) : Course
         }
     `,
     /** Crea Schema */
     mySchema = makeExecutableSchema({
-        typeDefs: typeDefs,
+        typeDefs,   // Short Hand Properties
         resolvers: {
             // parentObject (rootValue) Raiz de consultas de GraphQL
             Query: {
@@ -27,6 +34,19 @@ const
                     }
                     
                     return courses;
+                }
+            }, 
+            Mutation: {
+                // parentObject valor resuelto por el resolver padre, equivalente al rootValue de GraphQL
+                addCourse( parentObject, { input }) {
+                    const 
+                        { title, views } = input,       // Destructuring
+                        id = courses .length + 1,
+                        course = { id, title, views };
+        
+                    courses .push( course );
+                    
+                    return course;
                 }
             }        
         }
