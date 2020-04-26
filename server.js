@@ -19,6 +19,7 @@ const
         }
         type Mutation {
             addCourse( input: CourseInput ) : Course
+            updateCourse( id: ID!, input: CourseInput ) : Course
         }
     `,
     /** Crea Schema */
@@ -45,9 +46,19 @@ const
                         course = { id, title, views };
         
                     courses .push( course );
-                    
+
                     return course;
-                }
+                },
+                updateCourse( parentObject, { id, input } ) {
+                    const 
+                        index = courses .findIndex( course => id == course .id );
+                        course = courses[ index ],
+                        newCourse = Object .assign( course, input );     // Spread
+                    
+                    courses[ index ] = newCourse;
+        
+                    return newCourse;
+                },
             }        
         }
     }),
